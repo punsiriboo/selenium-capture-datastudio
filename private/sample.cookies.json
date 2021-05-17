@@ -1,0 +1,28 @@
+[{
+    "name": "XXXX",
+    "value": "XXXX",
+    "domain": ".google.com",
+    "path": "/",
+    "expires": 123423423423.498175,
+    "httpOnly": true,
+    "secure": false
+},
+{
+    "name": "XXXX",
+    "value": "XXXX",
+    "domain": ".google.com",
+    "path": "/",
+    "expires": 123423423423.498175,
+    "httpOnly": true,
+    "secure": false
+},
+{
+    "name": "XXXX",
+    "value": "XXXX",
+    "domain": ".google.com",
+    "path": "/",
+    "expires": 123423423423.498175,
+    "httpOnly": true,
+    "secure": false
+}
+]

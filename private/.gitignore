@@ -1,0 +1,4 @@
+*.json
+!sample.config.json
+!sample.cookies.json
+datastudio.google.com.cookies.json
