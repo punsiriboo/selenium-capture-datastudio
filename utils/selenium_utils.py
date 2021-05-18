@@ -9,30 +9,28 @@ from selenium.webdriver.support import expected_conditions as EC
 class SeleniumUtils:
 
     @staticmethod
-    def get_webdriver(selenium_remote_driver_url):
+    def get_webdriver(selenium_remote_driver_url:str):
         options = webdriver.ChromeOptions()
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-gpu")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--window-size=1024,768")
 
-        driver = webdriver.Remote(
-            command_executor=selenium_remote_driver_url,
-            desired_capabilities=DesiredCapabilities.CHROME,
-            options=options
-        )
-        print("INFO: Successfully create seleium webdriver.")
+        # Initialize a new browser
+        driver = webdriver.Chrome(chrome_options=options)
+        driver.get('')
+        print("INFO: Successfully create seleium webdriver.")  
         return driver
 
     @staticmethod
-    def add_cookies(driver, cookies_json_path):
-        with open(cookies_json_path) as json_file: cookies = json.load(json_file)
+    def add_cookies(driver, cookies_json_path:str):
+        with open(cookies_json_path) as json_file: cookies = json.load(cookies_json_path)
         for cookie in cookies: driver.add_cookie(cookie)
         print("INFO: Successfully add cookies.")
         return driver
         
     @staticmethod
-    def capture_report_screeen(driver):
+    def capture_report_screeen(driver, screenshot_name:str):
         screenshot_name = f"{uuid.uuid1()}.jpg"
         try:
             expected_xpath = """//div[contains(text(),"Can't access report")]"""
