@@ -19,10 +19,10 @@ Please edit file ``` private/config.json ``` before you run:
         "id": "",
         "page": ""
     },
-    "notify_token": "",
-    "selenium_remote_driver_url": ""
+    "notify_token": ""
 }
 ```
+*** If you not provide cookies, Please make sure that the dashboard is set to embed and public
 ## How to test locally 
 
 ### Start web service with docker :
@@ -34,6 +34,7 @@ docker run --rm -p 8080:8080 -e PORT=8080 capture_dashboard
 
 ### Test using curl command :
 ```
+curl http://0.0.0.0:8080
 ```
 
 ## How to deploy to Cloud Run

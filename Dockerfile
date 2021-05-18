@@ -15,6 +15,14 @@ RUN apt-get install -y gconf-service libasound2 libatk1.0-0 libcairo2 libcups2 l
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
 
+# Download Chrome drvier 
+RUN CHROME_DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE); wget -N https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/
+RUN unzip ~/chromedriver_linux64.zip -d ~/
+RUN rm ~/chromedriver_linux64.zip
+RUN chown root:root ~/chromedriver
+RUN chmod 0755 ~/chromedriver
+
+
 # Install Python dependencies.
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt

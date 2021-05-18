@@ -1,14 +1,13 @@
 from flask import Flask
-from selenium import webdriver
-import os , json, time, datetime
+import json, time
 from line_notify import LineNotify
 from utils import SeleniumUtils
-import chromedriver_binary  # Adds chromedriver binary to path
+
 
 app = Flask(__name__)
 
 @app.route("/")
-def handle_request(request):
+def handle_request():
     """Responds to any HTTP request.
     Args:
         request (flask.Request): HTTP request object.
@@ -24,24 +23,21 @@ def handle_request(request):
     REPORT_URL = "https://datastudio.google.com/embed/reporting/{report_id}/page/{page_id}".format(
                 report_id=config['report']['id'],
                 page_id=config['report']['page']
-            )
-    SELENIUM_REMOTE_DRIVER_URL = config['selenium_remote_driver_url']
+    )
     COOKIES_JSON_PATH = config['cookies_json_path']
     #endregion
-    selenium_utils = SeleniumUtils()
-    driver = selenium_utils.get_webdriver(SELENIUM_REMOTE_DRIVER_URL)
+    driver = SeleniumUtils.get_webdriver()
     notify = LineNotify(ACCESS_TOKEN)
-    driver = selenium_utils.add_cookies(driver, COOKIES_JSON_PATH)
-    time.sleep(5)
+    driver = SeleniumUtils.add_cookies(driver, COOKIES_JSON_PATH)
     driver.get(REPORT_URL)
-    captured_image_path = selenium_utils.capture_report_screeen(driver)
-    if captured_image_path is not None:
-        data_date = datetime.datetime.now.strftime("%m/%d/%Y, %H:%M:%S")
-        notify.send(f"Data Studio Dashboard/n As of {data_date}", image_path=captured_image_path)
-        selenium_utils.teardown_webdriver(driver)
+    captured_image_path, captured_status = SeleniumUtils.capture_report_screeen(driver)
+    if captured_status is not None:
+        data_date = time.strftime("%m/%d/%Y, %H:%M:%S", time.localtime(time.time()))
+        notify.send(f"Dashboard as of {data_date}", image_path=captured_image_path)
+        SeleniumUtils.teardown_webdriver(driver)
     else:
-        notify.send("Unable to capture report screen\n\n Please contact admin to refresh cookies or validate issue.")
-        selenium_utils.teardown_webdriver(driver)
+        notify.send("Unable to capture report screen\n\n Please contact admin to refresh cookies or validate issue.", image_path=captured_image_path)
+        SeleniumUtils.teardown_webdriver(driver)
         
     return 'Successfully send line notify dashboard.'
 

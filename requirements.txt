@@ -1,5 +1,4 @@
 line_notify
 Flask==1.0.2
 gunicorn==19.9.0
-selenium==3.141.0
-chromedriver-binary==77.0.3865.40.0
+selenium
