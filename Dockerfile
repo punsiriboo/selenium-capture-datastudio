@@ -1,5 +1,5 @@
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# NOTE: This is a copy version from the following content
+# NOTE: This is a copy and edited version from the following content
 # REF: https://dev.to/googlecloud/using-headless-chrome-with-cloud-run-3fdp
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -21,7 +21,6 @@ RUN unzip ~/chromedriver_linux64.zip -d ~/
 RUN rm ~/chromedriver_linux64.zip
 RUN chown root:root ~/chromedriver
 RUN chmod 0755 ~/chromedriver
-
 
 # Install Python dependencies.
 COPY requirements.txt requirements.txt

@@ -51,3 +51,4 @@ sh deploy_scripts/cloud_run.sh
 ```
 ## Reference
 * https://dev.to/googlecloud/using-headless-chrome-with-cloud-run-3fdp
+* https://gist.github.com/ziadoz/3e8ab7e944d02fe872c3454d17af31a5
